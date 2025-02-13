@@ -432,6 +432,9 @@ func rateLimitAndSetHeaders(c *gin.Context, key string) (limited bool) {
 
 func serviceHookHandler(c *gin.Context) {
 
+	fmt.Println("HEHEHEYYYYY")
+	log.Println("HEHEHEYYYYY")
+
 	// temp ugly routing before deprecating hook URL without service name
 
 	var service string

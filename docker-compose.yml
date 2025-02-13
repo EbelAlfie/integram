@@ -20,7 +20,11 @@ services:
     volumes:
         - data-redis:/data
   integram:
-    image: integram/integram:latest
+    image: integram:hahay
+    build:
+      context: .
+      tags:
+        - integram:hahay
     restart: always
     volumes:
       - data-mainapp:/app/.conf
