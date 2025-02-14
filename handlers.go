@@ -431,10 +431,6 @@ func rateLimitAndSetHeaders(c *gin.Context, key string) (limited bool) {
 }
 
 func serviceHookHandler(c *gin.Context) {
-
-	fmt.Println("HEHEHEYYYYY")
-	log.Println("HEHEHEYYYYY")
-
 	// temp ugly routing before deprecating hook URL without service name
 
 	var service string
@@ -444,6 +440,8 @@ func serviceHookHandler(c *gin.Context) {
 	p1 := c.Param("param1")
 	p2 := c.Param("param2")
 	p3 := c.Param("param3")
+
+	groupId := c.Query("groupId")
 
 	switch p1 {
 	// webpreview handler
@@ -469,6 +467,14 @@ func serviceHookHandler(c *gin.Context) {
 			// /service/token
 			service = p1
 			webhookToken = p2
+		} else if groupId != "" {
+			// service known
+			//
+			// /service?param=token
+			service = p1
+			p2 = groupId
+
+			webhookToken = groupId
 		} else {
 			// service unknown - to be determined
 			//

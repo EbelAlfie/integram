@@ -6,15 +6,16 @@ import (
 	"encoding/base64"
 	"encoding/binary"
 	"fmt"
-	"github.com/requilence/url"
-	log "github.com/sirupsen/logrus"
-	"github.com/vova616/xxhash"
 	"io/ioutil"
 	"math/rand"
 	"regexp"
 	"runtime"
 	"strings"
 	"time"
+
+	"github.com/requilence/url"
+	log "github.com/sirupsen/logrus"
+	"github.com/vova616/xxhash"
 )
 
 const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-0123456789"

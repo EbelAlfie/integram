@@ -23,9 +23,12 @@ services:
     image: integram:hahay
     build:
       context: .
+      no_cache: true
       tags:
         - integram:hahay
     restart: always
+    env_file:
+      - .env
     volumes:
       - data-mainapp:/app/.conf
     links:
@@ -106,7 +109,11 @@ services:
       - BITBUCKET_OAUTH_ID
       - BITBUCKET_OAUTH_SECRET
   webhook:
-    image: integram/webhook
+    image: webhook:hahay
+    build:
+      context: ./webhook
+      tags:
+        - "webhook:hahay"
     restart: always
     links:
       - mongo

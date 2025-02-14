@@ -14,6 +14,7 @@ import (
 	"time"
 
 	"crypto/md5"
+
 	"github.com/kennygrant/sanitize"
 
 	"github.com/requilence/jobs"
@@ -903,16 +904,6 @@ var ErrorBadRequstPrefix = "Can't process your request: "
 func (t scheduleMessageSender) Send(m *OutgoingMessage) error {
 	if m.processed {
 		return nil
-	}
-
-	if m.AntiFlood {
-		db := mongoSession.Clone().DB(mongo.Database)
-		defer db.Session.Close()
-		msg, _ := findLastOutgoingMessageInChat(db, m.BotID, m.ChatID)
-		if msg != nil && msg.om.TextHash == m.GetTextHash() && time.Now().Sub(msg.Date).Seconds() < antiFloodSameMessageTimeout {
-			//log.Errorf("flood. mins %v", time.Now().Sub(msg.Date).Minutes())
-			return ErrorFlood
-		}
 	}
 
 	if m.Selective && m.ChatID > 0 {
